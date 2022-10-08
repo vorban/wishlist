@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <style>
+        img.sized {
+            max-width: 100% !important;
+            height: unset !important;
+            width: auto !important;
+            max-height: 100% !important;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Wishlist</h1>
+            <p class="subtitle">
+                Thanks.
+            </p>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns is-multiline" x-data>
+                <template x-for="element in window.wishlist">
+                    <div class="column is-2">
+                        <div class="card is-clickable" x-on:click="window.open(element.url, '_blank').focus();">
+                            <div class="card-image">
+                                <figure class="image is-3by4">
+                                    <img class="sized" :src="element.img" alt="Image du produit">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <figure class="image ">
+                                            <img class="is-rounded" :src="element.websiteImage" alt="Icone du site">
+                                        </figure>
+                                    </div>
+                                    <div class="media-content">
+                                        <p class="title is-4" x-text="element.site"></p>
+                                        <p class="subtitle is-6" x-text="element.cost + '&nbsp;€'"></p>
+                                    </div>
+                                </div>
+
+                                <div class="content" x-text="element.name"></div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        function b64_to_utf8(str) {
+            return decodeURIComponent(escape(window.atob(str)));
+        }
+
+        var encodedData = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        }).wishlist;
+
+        var decodedData = JSON.parse(b64_to_utf8(encodedData));
+
+        window.wishlist = decodedData.items;
+        window.sites = decodedData.sites;
+
+        window.wishlist.forEach(item => {
+            let site = window.sites.find(site => site.name == item.site)
+            item.url = site.url + item.url
+            item.img = site.imgurl + item.img
+            item.websiteImage = site.img
+        })
+    </script>
+</body>
+
+</html>
