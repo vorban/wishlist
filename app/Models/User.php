@@ -32,4 +32,14 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(Item::class, 'buyer_id');
+    }
 }
