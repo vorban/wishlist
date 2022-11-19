@@ -1,3 +1,5 @@
+@props(['title'])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -18,13 +20,16 @@
             @include('layouts.navigation')
 
             <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex flex-row justify-between">
+                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">{!! $title !!}</h2>
+                    @if (isset($actions))
+                    <div>
+                        {{ $actions }}
                     </div>
-                </header>
-            @endif
+                    @endif
+                </div>
+            </header>
 
             <!-- Page Content -->
             <main>

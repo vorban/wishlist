@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MyListController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,12 +18,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
-        return view('dashboard');
+        return view('pages.dashboard');
     })->name('dashboard');
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::prefix('/profile')->controller(ProfileController::class)->as('profile.')->group(function () {
+        Route::get('/', 'edit')->name('edit');
+        Route::patch('/', 'update')->name('update');
+        Route::delete('/', 'destroy')->name('destroy');
+    });
+
+    Route::prefix('/my-list')->controller(MyListController::class)->as('my-list.')->group(function () {
+        Route::get('/', 'show')->name('show');
+        Route::get('/add', 'add')->name('add');
+        Route::post('/add', 'store');
+        Route::get('/delete/{id}', 'delete')->name('delete');
+    });
 });
 
 require __DIR__ . '/auth.php';
