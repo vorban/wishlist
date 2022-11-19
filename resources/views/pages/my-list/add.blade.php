@@ -1,4 +1,4 @@
-<x-app-layout :title=" __('My list') . ' > ' . __('Add an item')">
+<x-app-layout :title="__('Add an item')">
     <x-box>
         <section>
             <header>

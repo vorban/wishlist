@@ -31,6 +31,13 @@
     "No": "Non",
     "Delete": "Supprimer",
     "Bought": "Acheté",
-    "No item.": "Aucun élément.",
+    "No item yet.": "Aucun élément pour l'instant.",
+    "You already bought this one.": "Vous avez déjà acheté cet élément",
+    "Include someone": "Inclure quelqu'un",
+    "Other's list": "Les listes des autres",
+    "Users": "Utilisateurs",
+    "No user yet.": "Aucun utilisateur pour l'instant.",
+    "Who can see my list?": "Qui peut voir ma liste ?",
+    "You can include or exclude anyone whenever.": "Vous pouvez inclure ou exclure n'importe qui, n'importe quand.",
     "Update your account's profile information and email address.": "Mettez à jour les informations de votre profil et votre adresse e-mail."
 }

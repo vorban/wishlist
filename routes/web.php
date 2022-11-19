@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ListController;
 use App\Http\Controllers\MyListController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -29,9 +30,20 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/my-list')->controller(MyListController::class)->as('my-list.')->group(function () {
         Route::get('/', 'show')->name('show');
+
         Route::get('/add', 'add')->name('add');
         Route::post('/add', 'store');
         Route::get('/delete/{id}', 'delete')->name('delete');
+
+        Route::get('/access', 'access')->name('access');
+        Route::post('/access', 'setAccess');
+        Route::get('/users', 'users')->name('users');
+        Route::get('/revoke/{id}', 'revoke')->name('revoke');
+    });
+
+    Route::prefix('/lists')->as('list.')->controller(ListController::class)->group(function () {
+        Route::get('/', 'show')->name('show');
+        Route::get('/buy/{id}', 'buy')->name('buy');
     });
 });
 

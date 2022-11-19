@@ -42,4 +42,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Item::class, 'buyer_id');
     }
+
+    public function allowing()
+    {
+        return $this->belongsToMany(User::class, 'allowances', 'allowing_id', 'allowed_id');
+    }
+
+    public function allowed()
+    {
+        return $this->belongsToMany(User::class, 'allowances', 'allowed_id', 'allowing_id');
+    }
 }
