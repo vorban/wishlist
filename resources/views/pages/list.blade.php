@@ -4,6 +4,7 @@
         <header>
             <h2 class="text-lg font-medium text-gray-900">{{ $allowing->name }}</h2>
         </header>
+        <x-auth-session-status class="text-red-600" :status="session('status')" />
         <table class="w-full text-gray-800 text-left mt-3">
             <thead class="border-b-2">
                 <tr>

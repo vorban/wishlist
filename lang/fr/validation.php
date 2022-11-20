@@ -175,6 +175,7 @@ return [
         'email' => 'E-mail',
         'password' => 'mot de passe',
         'name' => 'nom',
+        'current_password' => 'mot de passe actuel',
     ],
 
 ];

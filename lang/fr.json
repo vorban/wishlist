@@ -35,9 +35,15 @@
     "You already bought this one.": "Vous avez déjà acheté cet élément",
     "Include someone": "Inclure quelqu'un",
     "Other's list": "Les listes des autres",
+    "Choose some users...": "Recherchez un ou plusieurs utilisateurs...",
     "Users": "Utilisateurs",
+    "Buy": "Acheter",
+    "Already bought": "Cet élément est déjà acheté",
     "No user yet.": "Aucun utilisateur pour l'instant.",
     "Who can see my list?": "Qui peut voir ma liste ?",
+    "Items in my list": "Éléments dans ma liste",
+    "Users who can see my list": "Les utilisateurs qui voient ma liste",
+    "Users whom I can see the list": "Les utilisateurs dont je vois la liste",
     "You can include or exclude anyone whenever.": "Vous pouvez inclure ou exclure n'importe qui, n'importe quand.",
     "Update your account's profile information and email address.": "Mettez à jour les informations de votre profil et votre adresse e-mail."
 }

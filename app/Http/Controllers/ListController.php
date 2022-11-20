@@ -19,6 +19,9 @@ class ListController extends Controller
         $user = $request->user();
 
         $item = Item::query()->find($id);
+        if ($item->buyer_id) {
+            return redirect()->back()->with('status', 'Already bought');
+        }
         $item->buyer_id = $user->id;
         $item->save();
 

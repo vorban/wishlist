@@ -3,6 +3,7 @@
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\MyListController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('pages.dashboard');
+    Route::get('/', function (Request $request) {
+        return view('pages.dashboard', ['user' => $request->user()]);
     })->name('dashboard');
 
     Route::prefix('/profile')->controller(ProfileController::class)->as('profile.')->group(function () {
