@@ -2,10 +2,11 @@
 version: '3'
 services:
     reverse-proxy:
+        labels:
+            - traefik.enable=false
         image: traefik:v2.9
         command: >
             --providers.docker
-            --providers.docker.exposedbydefault=false
             --entrypoints.web.address=:80
             --entrypoints.web.http.redirections.entrypoint.to=websecure
             --entrypoints.web.http.redirections.entrypoint.scheme=https
@@ -25,7 +26,6 @@ services:
     laravel.test:
         labels:
             - traefik.http.routers.laravel.rule=Host(`wishlist.vorban.ovh`)
-            - traefik.enable=true
         build:
             context: ./vendor/laravel/sail/runtimes/8.1
             dockerfile: Dockerfile
@@ -41,6 +41,8 @@ services:
         depends_on:
             - mariadb
     mariadb:
+        labels:
+            - traefik.enable=false
         image: 'mariadb:10'
         environment:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
