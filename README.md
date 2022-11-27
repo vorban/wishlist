@@ -2,6 +2,12 @@
 
 A wishlist webapp.
 
+```bash
+set -a
+source .env
+set +a
+docker compose -f ops/docker-compose.yml exec laravel.test bash
+```
 
 ## Local Development
 
