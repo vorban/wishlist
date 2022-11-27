@@ -2,19 +2,14 @@
 version: '3'
 services:
     laravel.test:
+        labels:
+            - traefik.http.routers.laravel.rule=Host(`wishlist.vorban.ovh`)
+            - traefik.http.services.laravel.loadbalancer.server.port=80
         build:
             context: ./vendor/laravel/sail/runtimes/8.1
             dockerfile: Dockerfile
-            args:
-                WWWGROUP: '${WWWGROUP}'
         image: sail-8.1/app
-        extra_hosts:
-            - 'host.docker.internal:host-gateway'
-        ports:
-            - '${APP_PORT:-80}:80'
-            - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
         environment:
-            WWWUSER: '${WWWUSER}'
             LARAVEL_SAIL: 1
             XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
             XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
@@ -22,12 +17,15 @@ services:
             - '.:/var/www/html'
         networks:
             - sail
+            - traefik
         depends_on:
             - mariadb
+        links:
+            - "mariadb:mariadb"
     mariadb:
+        labels:
+            - traefik.enable=false
         image: 'mariadb:10'
-        ports:
-            - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ROOT_HOST: "%"
@@ -47,6 +45,8 @@ services:
 networks:
     sail:
         driver: bridge
+    traefik:
+        external: true
 volumes:
     sail-mariadb:
         driver: local
